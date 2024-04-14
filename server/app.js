@@ -26,9 +26,8 @@ app.post('/insert', (request, response) => {
 // read
 app.get('/getAll', (request, response) => {
     const db = dbService.getDbServiceInstance();
-
     const result = db.getAllData();
-    
+
     result
     .then(data => response.json({data : data}))
     .catch(err => console.log(err));
@@ -69,4 +68,4 @@ app.get('/search/:name', (request, response) => {
     .catch(err => console.log(err));
 })
 
-app.listen(process.env.PORT, () => console.log('app is running'));
+app.listen(process.env.PORT, () => console.log(`app is running on port: ${process.env.PORT}`));

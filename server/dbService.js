@@ -4,18 +4,23 @@ let instance = null;
 dotenv.config();
 
 const connection = mysql.createConnection({
-    host: process.env.HOST,
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE,
-    port: process.env.DB_PORT
+    host: "localhost",
+    user: "web_app",
+    password: "test12345",
+    database: "web_app_training",
+    port: "3307"
+    // host: process.env.HOST,
+    // user: process.env.USERNAME,
+    // password: process.env.PASSWORD,
+    // database: process.env.DATABASE,
+    // port: process.env.DB_PORT
 });
 
 connection.connect((err) => {
     if (err) {
         console.log(err.message);
     }
-    // console.log('db ' + connection.state);
+    console.log('db ' + connection.state);
 });
 
 
@@ -46,9 +51,8 @@ class DbService {
         try {
             const dateAdded = new Date();
             const insertId = await new Promise((resolve, reject) => {
-                const query = "INSERT INTO names (name, date_added) VALUES (?,?);";
-
-                connection.query(query, [name, dateAdded] , (err, result) => {
+                const query0 = "INSERT INTO names (name, date_added) VALUES (?,?);";
+                connection.query(query0, [name, dateAdded] , (err, result) => {
                     if (err) reject(new Error(err.message));
                     resolve(result.insertId);
                 })
